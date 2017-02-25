@@ -5,3 +5,6 @@
 # glide
 glide.lock
 vendor
+
+# bin
+katas-go-fizbuzz
