@@ -57,3 +57,35 @@ func TestFizBuzz(t *testing.T) {
         })
     })
 }
+
+func TestFizzBuzzBang(t *testing.T) {
+    Convey("returns numbers when there are no bangs", t, func() {
+        Convey("given input number", func() {
+            inputNumber := 3
+            Convey("when calculates fizzbuzzbang without any bangs", func() {
+                gotResult := FizzBuzzBang(inputNumber)
+                Convey("then returns input number", func() {
+                    So(gotResult, ShouldEqual, fmt.Sprintf("%d", inputNumber))
+                })
+            })
+        })
+    })
+
+    Convey("returns bang when bang matches the input number", t, func() {
+        Convey("given input number matching by bang", func() {
+            inputNumberMatchingByBang := 3
+            Convey("and bang matches the input number", func() {
+                bangValue := "bang"
+                bang := func (number int) (string, bool) {
+                    return bangValue, true
+                }
+                Convey("when calculates fizzbuzzbang with bang that matches input number", func() {
+                    gotResult := FizzBuzzBang(inputNumberMatchingByBang, bang)
+                    Convey("then returns bang", func() {
+                        So(gotResult, ShouldEqual, bangValue)
+                    })
+                })
+            })
+        })
+    })
+}

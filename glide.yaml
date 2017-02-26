@@ -3,7 +3,9 @@ license: MIT
 owners:
 - name: Artur Krysiak
   email: artur.krysiak.warszawa@gmail.com
-import:
+import: []
 testImport:
 - package: github.com/smartystreets/goconvey
   version: ~1.6.2
+- package: github.com/stretchr/testify
+  version: ~1.1.4

@@ -21,3 +21,17 @@ func FizzBuzz(number int) string {
     
     return result
 }
+
+type Bang func(number int) (string, bool)
+
+func FizzBuzzBang(number int, bangs ... Bang) string {
+    result := fmt.Sprintf("%d", number)
+
+    for _, bang := range bangs {
+        if bangResult, bangMatches := bang(number); bangMatches {
+            result = bangResult
+        }
+    }
+
+    return result
+}
