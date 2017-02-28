@@ -6,6 +6,9 @@ func main() {
     for number := 0; number < 101; number++ {
         println(FizzBuzz(number))
     }
+    for number := 0; number < 101; number++ {
+        println(FizzBuzzBang(number, Fizz, Buzz, Bang))
+    }
 }
 
 func FizzBuzz(number int) string {
@@ -22,15 +25,50 @@ func FizzBuzz(number int) string {
     return result
 }
 
-type Bang func(number int) (string, bool)
+type BangFunc func(number int) (string, bool)
 
-func FizzBuzzBang(number int, bangs ... Bang) string {
-    result := fmt.Sprintf("%d", number)
+
+func Fizz(number int) (string, bool) {
+    if number % 3 == 0 {
+        return "Fizz", true
+    }
+
+    return fmt.Sprintf("%d", number), false
+}
+
+
+func Buzz(number int) (string, bool) {
+    if number % 5 == 0 {
+        return "Buzz", true
+    }
+
+    return fmt.Sprintf("%d", number), false
+}
+
+
+func Bang(number int) (string, bool) {
+    if number % 7 == 0 {
+        return "Bang", true
+    }
+
+    return fmt.Sprintf("%d", number), false
+}
+
+
+func FizzBuzzBang(number int, bangs ... BangFunc) string {
+    result := ""
+    matches := false
 
     for _, bang := range bangs {
         if bangResult, bangMatches := bang(number); bangMatches {
-            result = bangResult
+            result += bangResult
+
+            matches = matches || bangMatches
         }
+    }
+
+    if !matches {
+        result = fmt.Sprintf("%d", number)
     }
 
     return result

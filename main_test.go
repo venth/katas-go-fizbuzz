@@ -4,6 +4,7 @@ import (
     "fmt"
     "testing"
     . "github.com/smartystreets/goconvey/convey"
+    "github.com/stretchr/testify/assert"
 )
 
 func TestFizBuzz(t *testing.T) {
@@ -88,4 +89,27 @@ func TestFizzBuzzBang(t *testing.T) {
             })
         })
     })
+}
+
+func TestReturnsFizzBangWhenBothMatchSameNumber(t *testing.T) {
+    // given
+    inputNumberMatchingByFizzAndBang := 3
+
+    // and
+    bangValue := "bang"
+    bang := func (number int) (string, bool) {
+        return bangValue, true
+    }
+
+    // and
+    fizzValue := "fizz"
+    fizz := func (number int) (string, bool) {
+        return fizzValue, true
+    }
+
+    // when
+    gotResult := FizzBuzzBang(inputNumberMatchingByFizzAndBang, fizz, bang)
+
+    // then
+    assert.Equal(t, fizzValue + bangValue, gotResult)
 }
